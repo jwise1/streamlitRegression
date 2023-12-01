@@ -1,4 +1,8 @@
 # streamlitRegression
 Linear regression model for prediction of receipt totals for Fetch 2022. Deployed via streamlit and containerized using Docker.
-TO RUN locally: download files to folder. with docker running, using command in terminal at folder location: docker compose up --build
-Then, connect to localhost:8501 via web browser. Streamlit linear regression application should appear.
+TO RUN: pull image from docker hub: with docker open, run terminal command "docker pull jaredwise/lr_receipt_tracker:v1"
+This pulls the deployment image to your machine to run. Then, run the command "docker run -p 8501:8501 jaredwise/lr_receipt_tracker:v1"
+
+This allows you to navigate to a web browser and connect to the web app locally by accessing the site: "localhost:8501"
+
+The 8501 designation is giving a specific port number to access the application on.
