@@ -2,20 +2,26 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import seaborn as sns
+import os 
 import matplotlib.pyplot as plt
+import dill
 import pickle
-import joblib
 
-model = pickle.load(open('data/linReg.pkl','rb'))
-#LR = joblib.load('data/linReg.pkl') 
-# Use the loaded model to make predictions 
+# with open("model.dill", "rb") as f:
+#     model=dill.load(f)
 
-weight=200
-bias=7
+with open("weight.pkl", "rb") as f:
+    weight = pickle.load(f)
+with open("bias.pkl", "rb") as f:
+    bias=pickle.load(f)
+
+# Use the loaded values to make predictions 
+
+# weight=7169074.5
+# bias=221875330.0
+
 def predictRecs(uMonth):
-    prediction = model(int(uMonth))
-    
-    return str(prediction)
+    return str((float(uMonth)*weight)+bias)
 
 @st.cache_data
 def load_data(file):
@@ -25,9 +31,9 @@ def load_data(file):
 
 def main():
     # This sets the page title and a cute favicon
-    st.set_page_config(page_title='Predicting Monthly Receipt Totals with Linear Regression', page_icon="🧾")
+    st.set_page_config(page_title='Predicting 2022 Monthly Receipt Totals with Linear Regression', page_icon="🧾")
 
-    data = load_data("data/data_daily.csv")
+    data = load_data("data_daily.csv")
 
     st.title("Predicting Monthly Receipt Totals with Linear Regression🧾")
 
@@ -37,8 +43,8 @@ def main():
     sns.color_palette("Set2")
 
     # Plot the data using Seaborn's countplot
-    fig, ax = plt.subplots(figsize=(100, 50))
-    ax = sns.scatterplot(data,x=data["Receipt_Count"],y=data["# Date"])
+    fig, ax = plt.subplots(figsize=(30, 8))
+    ax = sns.scatterplot(data,x=data["# Date"],y=data["Receipt_Count"])
 
     st.pyplot(fig)
 
