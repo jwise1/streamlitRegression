@@ -31,7 +31,7 @@ def load_data(file):
 
 def main():
     # This sets the page title and a cute favicon
-    st.set_page_config(page_title='Predicting 2022 Monthly Receipt Totals with Linear Regression', page_icon="🧾")
+    st.set_page_config(page_title='Predicting 2023 Monthly Receipt Totals with Linear Regression', page_icon="🧾")
 
     data = load_data("data_daily.csv")
 
